@@ -21,7 +21,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const CHAT_MESSAGE_TEMPLATE =
-  ", on the basis of the description please create a form in json format with form title form subheading, form fields with name, placeholder, label, fieldType and required set to true or false.return just the json as simple text with no decoration.";
+  ", on the basis of the description please create a form in json format with form title form subheading, form fields with name, placeholder, label, fieldType and required set to true or false.return just the json as simple text with no decoration like ```json etc. The fieldType of fields with options should be 'dropdown', options should always have the form of {label: string, value: string} , for checkbox groups fieldType should be 'checkbox-group' and for checkboxes fieldType should be 'checkbox'. For radio groups fieldType should be 'radio-group' and for radio buttons fieldType should be 'radio' for sliders/range field type should be 'range'.";
 
 export function CreateFormDialog() {
   const { user } = useUser();
