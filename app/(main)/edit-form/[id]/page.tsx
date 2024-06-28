@@ -1,5 +1,5 @@
 "use client";
-import { getFormData } from "@/app/actions";
+import { getFormData, updateFormData } from "@/app/actions";
 import Page from "@/components/Page";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { IForm } from "../types";
 import FormUI from "../_components/FormUI";
+import { toast } from "sonner";
 
 type Props = {
   params: { id: number };
@@ -34,6 +35,17 @@ export default function EditFormPage({ params: { id } }: Props) {
       fetchData();
     }
   }, [id, user]);
+
+  async function onJsonUpdate(json: string) {
+    setFormData({ ...formData, jsonform: json });
+    await updateFormData(
+      id,
+      user?.primaryEmailAddress?.emailAddress || "",
+      json
+    );
+
+    toast.success("Form updated successfully");
+  }
   return (
     <Page>
       <Button
@@ -52,7 +64,7 @@ export default function EditFormPage({ params: { id } }: Props) {
           Controls
         </div>
         <div className="col-span-2 p-4 border rounded-lg h-[calc(100vh-200px)] overflow-auto">
-          <FormUI json={json} />
+          <FormUI json={json} onUpdate={onJsonUpdate} />
         </div>
       </div>
     </Page>

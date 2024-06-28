@@ -12,3 +12,10 @@ export async function getFormData(id: number, email: string) {
 
   return response;
 }
+
+export async function updateFormData(id: number, email: string, json: string) {
+  return db
+    .update(jsonForms)
+    .set({ jsonform: json })
+    .where(and(eq(jsonForms.id, id), eq(jsonForms.createdBy, email)));
+}

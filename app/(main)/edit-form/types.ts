@@ -33,3 +33,8 @@ export enum FieldType {
   CheckboxGroup = "checkbox-group",
   RadioGroup = "radio-group",
 }
+
+export interface IOnUpdateFieldArg {
+  label: string;
+  placeholder: string;
+}
