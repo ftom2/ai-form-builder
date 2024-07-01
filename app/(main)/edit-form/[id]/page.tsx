@@ -18,10 +18,10 @@ type Props = {
 };
 
 export default function EditFormPage({ params: { id } }: Props) {
-  const [formData, setFormData] = useState<any>(null);
   const { user } = useUser();
   const setForm = useFormStore((state) => state.setForm);
   const form = useFormStore((state) => state.form);
+  const selectedBG = useFormStore((state) => state.selectedBackground);
 
   const fetchData = useCallback(async () => {
     if (user) {
@@ -70,7 +70,10 @@ export default function EditFormPage({ params: { id } }: Props) {
         <div className="col-span-1 p-4 border rounded-lg h-[calc(100vh-200px)]">
           <StylesController />
         </div>
-        <div className="col-span-2 p-4 border rounded-lg h-[calc(100vh-200px)] overflow-auto">
+        <div
+          className="col-span-2 p-4 border rounded-lg h-[calc(100vh-200px)] overflow-auto"
+          style={{ background: selectedBG }}
+        >
           <FormUI json={form} onUpdate={onJsonUpdate} />
         </div>
       </div>

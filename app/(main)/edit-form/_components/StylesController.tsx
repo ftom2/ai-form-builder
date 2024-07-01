@@ -1,5 +1,5 @@
 import ThemeSelector from "./ThemeSelector";
-import BackgroundSelector from "./BackgroundSelector";
+import { BackgroundSelector } from "./BackgroundSelector";
 
 export default function StylesController() {
   return (

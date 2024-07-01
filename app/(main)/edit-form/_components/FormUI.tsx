@@ -38,7 +38,9 @@ export default function FormUI({ json, onUpdate }: Props) {
   if (!json) return "Loading...";
   return (
     <div
-      className=" p-4 flex flex-col items-center"
+      className={`p-4 flex flex-col items-center max-w-2xl m-auto ${
+        selectedTheme["color-scheme"] === "dark" ? "dark" : ""
+      }`}
       data-theme={selectedTheme.theme}
     >
       <h2 className="font-semibold text-xl text-center">{json.title}</h2>
