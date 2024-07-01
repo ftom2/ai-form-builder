@@ -13,6 +13,7 @@ import StylesController from "../_components/StylesController";
 
 import { useFormStore } from "@/app/store/useFormStore";
 import { THEMES } from "@/app/themes";
+import PageActions from "../_components/PageActions";
 
 type Props = {
   params: { id: number };
@@ -88,17 +89,7 @@ export default function EditFormPage({ params: { id } }: Props) {
 
   return (
     <Page>
-      <Button
-        asChild
-        variant="ghost"
-        size="icon"
-        className="hover:bg-transparent mb-5 hover:font-bold"
-      >
-        <Link href="/dashboard">
-          <ArrowLeft size={16} className="shrink-0" />
-          Back
-        </Link>
-      </Button>
+      <PageActions id={id} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5" data-theme="light">
         <div className="col-span-1 p-4 border rounded-lg h-[calc(100vh-200px)]">
           <StylesController isLoading={isLoading} />
