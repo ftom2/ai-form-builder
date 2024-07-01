@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IForm } from "../types";
 import FormUI from "../_components/FormUI";
 import { toast } from "sonner";
+import StylesController from "../_components/StylesController";
+
+import { useFormStore } from "@/app/store/useFormStore";
 
 type Props = {
   params: { id: number };
@@ -17,35 +20,39 @@ type Props = {
 export default function EditFormPage({ params: { id } }: Props) {
   const [formData, setFormData] = useState<any>(null);
   const { user } = useUser();
+  const setForm = useFormStore((state) => state.setForm);
+  const form = useFormStore((state) => state.form);
 
-  const json: IForm = useMemo(() => {
-    if (!formData) return null;
-    return JSON.parse(formData.jsonform);
-  }, [formData]);
-
-  useEffect(() => {
-    async function fetchData() {
+  const fetchData = useCallback(async () => {
+    if (user) {
       const response = await getFormData(
         id,
-        user!.primaryEmailAddress?.emailAddress!
+        user.primaryEmailAddress?.emailAddress!
       );
-      setFormData(response[0]);
+
+      setForm(JSON.parse(response[0].jsonform));
     }
-    if (user) {
-      fetchData();
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, user]);
 
-  async function onJsonUpdate(json: string) {
-    setFormData({ ...formData, jsonform: json });
-    await updateFormData(
-      id,
-      user?.primaryEmailAddress?.emailAddress || "",
-      json
-    );
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, setForm]);
 
-    toast.success("Form updated successfully");
-  }
+  const onJsonUpdate = useCallback(
+    async (json: string) => {
+      setForm(JSON.parse(json));
+      await updateFormData(
+        id,
+        user?.primaryEmailAddress?.emailAddress || "",
+        json
+      );
+      toast.success("Form updated successfully");
+    },
+
+    [id, setForm, user?.primaryEmailAddress?.emailAddress]
+  );
+
   return (
     <Page>
       <Button
@@ -59,12 +66,12 @@ export default function EditFormPage({ params: { id } }: Props) {
           Back
         </Link>
       </Button>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5" data-theme="light">
         <div className="col-span-1 p-4 border rounded-lg h-[calc(100vh-200px)]">
-          Controls
+          <StylesController />
         </div>
         <div className="col-span-2 p-4 border rounded-lg h-[calc(100vh-200px)] overflow-auto">
-          <FormUI json={json} onUpdate={onJsonUpdate} />
+          <FormUI json={form} onUpdate={onJsonUpdate} />
         </div>
       </div>
     </Page>

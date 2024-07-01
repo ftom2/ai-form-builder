@@ -1,17 +1,22 @@
+"use client";
 import { useState } from "react";
-import { IForm, IFormField, IOnUpdateFieldArg } from "../types";
+import { IForm, IOnUpdateFieldArg } from "../types";
 import { componentsToFormElementsMapper } from "./componentsMapper";
 import FieldActions from "./FieldActions";
+import { useFormStore } from "@/app/store/useFormStore";
 
 type Props = {
-  json: IForm;
+  json: IForm | null;
+
   onUpdate: (json: string) => void;
 };
 
 export default function FormUI({ json, onUpdate }: Props) {
   const [date, setDate] = useState(new Date());
+  const selectedTheme = useFormStore((state) => state.selectedTheme);
 
   function handleFieldUpdate(data: IOnUpdateFieldArg, index: number) {
+    if (!json) return;
     const newJson = { ...json };
     // get the field to update
     const fieldToUpdate = newJson.fields[index];
@@ -22,6 +27,7 @@ export default function FormUI({ json, onUpdate }: Props) {
   }
 
   function handleOnFieldDelete(index: number) {
+    if (!json) return;
     const newJson = { ...json };
     // remove the field
     newJson.fields.splice(index, 1);
@@ -30,9 +36,11 @@ export default function FormUI({ json, onUpdate }: Props) {
   }
 
   if (!json) return "Loading...";
-  console.log({ json });
   return (
-    <div className=" p-4 flex flex-col items-center">
+    <div
+      className=" p-4 flex flex-col items-center"
+      data-theme={selectedTheme.theme}
+    >
       <h2 className="font-semibold text-xl text-center">{json.title}</h2>
       <p className="text-gray-500 text-center">{json.subheading}</p>
 
@@ -52,6 +60,7 @@ export default function FormUI({ json, onUpdate }: Props) {
           </div>
         ))}
       </form>
+      <button className="mt-5 w-full max-w-xs btn btn-primary">Button</button>
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function AuthLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} h-screen`}>
+      <body className={`${inter.className} min-h-screen`}>
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>

@@ -24,21 +24,22 @@ import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 
 const textField = (field: IFormField) => (
-  <div className="grid w-full  items-center gap-1.5" key={field.name}>
-    <Label htmlFor={field.name}>{field.label}</Label>
-    <Input
-      id={field.name}
-      name={field.name}
-      type={field.fieldType}
+  <label className="form-control w-full ">
+    <div className="label">
+      <span className="label-text">{field.label}</span>
+    </div>
+    <input
+      type="text"
       placeholder={field.placeholder}
+      className="input input-bordered w-full input-primary"
     />
-  </div>
+  </label>
 );
 const dropdown = (field: IFormField) => (
   <div>
     <Label htmlFor={field.name}>{field.label}</Label>
     <Select>
-      <SelectTrigger className="w-full" id={field.name}>
+      <SelectTrigger id={field.name} className="w-full ">
         <SelectValue placeholder={field.placeholder} />
       </SelectTrigger>
       <SelectContent>
