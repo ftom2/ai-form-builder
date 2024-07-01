@@ -3,6 +3,7 @@
 import { db } from "@/db";
 import { jsonForms } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
+import { UpdateFormMetadataRequest } from "./(main)/edit-form/types";
 
 export async function getFormData(id: number, email: string) {
   const response = await db
@@ -17,5 +18,18 @@ export async function updateFormData(id: number, email: string, json: string) {
   return db
     .update(jsonForms)
     .set({ jsonform: json })
+    .where(and(eq(jsonForms.id, id), eq(jsonForms.createdBy, email)));
+}
+
+export async function updateFormMetadata({
+  id,
+  email,
+  theme,
+  background,
+  style,
+}: UpdateFormMetadataRequest) {
+  return db
+    .update(jsonForms)
+    .set({ theme, background, style })
     .where(and(eq(jsonForms.id, id), eq(jsonForms.createdBy, email)));
 }

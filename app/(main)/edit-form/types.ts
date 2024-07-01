@@ -38,3 +38,11 @@ export interface IOnUpdateFieldArg {
   label: string;
   placeholder: string;
 }
+
+export interface UpdateFormMetadataRequest {
+  id: number;
+  email: string;
+  theme: string;
+  background: string;
+  style: string;
+}

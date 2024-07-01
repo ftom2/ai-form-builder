@@ -35,7 +35,10 @@ export default function FormUI({ json, onUpdate }: Props) {
     onUpdate(JSON.stringify(newJson));
   }
 
-  if (!json) return "Loading...";
+  if (!json)
+    return (
+      <div className="grid place-items-center h-full text-xl">Loading...</div>
+    );
   return (
     <div
       className={`p-4 flex flex-col items-center max-w-2xl m-auto ${

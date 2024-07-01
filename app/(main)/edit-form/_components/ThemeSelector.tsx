@@ -12,7 +12,8 @@ import {
 type Props = {};
 
 export default function ThemeSelector({}: Props) {
-  const setTheme = useFormStore((state) => state.setTheme);
+  const setTheme = useFormStore((state) => state.setSelectedTheme);
+  const selectedTheme = useFormStore((state) => state.selectedTheme);
   function onThemeSelected(value: string) {
     const theme = THEMES.find((theme) => theme.theme === value);
     if (theme) {
@@ -22,7 +23,7 @@ export default function ThemeSelector({}: Props) {
   return (
     <div>
       <Label>Select Theme:</Label>
-      <Select onValueChange={onThemeSelected} defaultValue={THEMES[0].theme}>
+      <Select onValueChange={onThemeSelected} value={selectedTheme.theme}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
