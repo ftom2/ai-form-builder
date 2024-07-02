@@ -7,11 +7,15 @@ import { useFormStore } from "@/app/store/useFormStore";
 
 type Props = {
   json: IForm | null;
-
-  onUpdate: (json: string) => void;
+  preview?: boolean;
+  onUpdate?: (json: string) => void;
 };
 
-export default function FormUI({ json, onUpdate }: Props) {
+export default function FormUI({
+  json,
+  preview = false,
+  onUpdate = () => {},
+}: Props) {
   const [date, setDate] = useState(new Date());
   const selectedTheme = useFormStore((state) => state.selectedTheme);
 
@@ -41,7 +45,7 @@ export default function FormUI({ json, onUpdate }: Props) {
     );
   return (
     <div
-      className={`p-4 flex flex-col items-center max-w-2xl m-auto ${
+      className={`p-4 flex flex-col items-center max-w-2xl m-auto rounded-md ${
         selectedTheme["color-scheme"] === "dark" ? "dark" : ""
       }`}
       data-theme={selectedTheme.theme}
@@ -55,13 +59,15 @@ export default function FormUI({ json, onUpdate }: Props) {
             <div className="flex-1">
               {componentsToFormElementsMapper(field, { date, setDate })}
             </div>
-            <div>
-              <FieldActions
-                defaultValue={field}
-                onUpdate={(data) => handleFieldUpdate(data, idx)}
-                onDelete={() => handleOnFieldDelete(idx)}
-              />
-            </div>
+            {!preview && (
+              <div>
+                <FieldActions
+                  defaultValue={field}
+                  onUpdate={(data) => handleFieldUpdate(data, idx)}
+                  onDelete={() => handleOnFieldDelete(idx)}
+                />
+              </div>
+            )}
           </div>
         ))}
       </form>

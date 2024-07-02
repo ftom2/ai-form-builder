@@ -54,7 +54,7 @@ const dropdown = (field: IFormField) => (
 );
 export const componentsToFormElementsMapper = (
   field: IFormField,
-  data: any
+  data?: any
 ) => {
   const formElements = {
     text: textField(field),
@@ -77,18 +77,18 @@ export const componentsToFormElementsMapper = (
               variant={"outline"}
               className={cn(
                 "w-[280px] justify-start text-left font-normal",
-                !data.date && "text-muted-foreground"
+                !data?.date && "text-muted-foreground"
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {data.date ? format(data.date, "PPP") : <span>Pick a date</span>}
+              {data?.date ? format(data.date, "PPP") : <span>Pick a date</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
             <Calendar
               mode="single"
-              selected={data.date}
-              onSelect={data.setDate}
+              selected={data?.date}
+              onSelect={data?.setDate}
               initialFocus
             />
           </PopoverContent>

@@ -1,3 +1,5 @@
+import { getFormData } from "@/app/actions";
+
 export interface IOption {
   label: string;
   value: string;
@@ -46,3 +48,7 @@ export interface UpdateFormMetadataRequest {
   background: string;
   style: string;
 }
+
+export type GetFormDataResponse = Awaited<
+  ReturnType<typeof getFormData>
+>[number];
