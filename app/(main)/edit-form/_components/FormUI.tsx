@@ -4,7 +4,6 @@ import { IForm, IOnUpdateFieldArg } from "../types";
 import { componentsToFormElementsMapper } from "./componentsMapper";
 import FieldActions from "./FieldActions";
 import { useFormStore } from "@/app/store/useFormStore";
-import { Button } from "@/components/ui/button";
 
 type Props = {
   json: IForm | null;

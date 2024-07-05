@@ -1,6 +1,6 @@
 import EditPopover from "./EditPopover";
 import { IFormField, IOnUpdateFieldArg } from "../types";
-import DeleteDialog from "./DeleteDialog";
+import DeleteDialog from "@/components/DeleteDialog";
 
 type Props = {
   defaultValue: IFormField;

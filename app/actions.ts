@@ -43,3 +43,9 @@ export async function updateFormMetadata({
     .set({ theme, background, style })
     .where(and(eq(jsonForms.id, id), eq(jsonForms.createdBy, email)));
 }
+
+export async function deleteForm(id: number, email: string) {
+  return db
+    .delete(jsonForms)
+    .where(and(eq(jsonForms.id, id), eq(jsonForms.createdBy, email)));
+}

@@ -89,7 +89,11 @@ export default function EditFormPage({ params: { id } }: Props) {
 
   return (
     <Page>
-      <PageActions id={id} />
+      <PageActions
+        id={id}
+        title={form?.title ?? ""}
+        text={form?.subheading ?? ""}
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5" data-theme="light">
         <div className="col-span-1 p-4 border rounded-lg h-[calc(100vh-200px)]">
           <StylesController isLoading={isLoading} />
