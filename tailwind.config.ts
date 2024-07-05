@@ -73,6 +73,10 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      gridTemplateColumns: {
+        "auto-fit": "repeat(auto-fit, minmax(13rem, 1fr))",
+        "auto-fill": "repeat(auto-fit, minmax(0, 1fr))",
+      },
     },
   },
   daisyui: {

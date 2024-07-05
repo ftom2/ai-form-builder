@@ -75,7 +75,7 @@ export function CreateFormDialog() {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="ghost">
+            <Button type="button" color="ghost">
               Cancel
             </Button>
           </DialogClose>

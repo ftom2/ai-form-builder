@@ -5,6 +5,7 @@ export interface IOption {
   value: string;
 }
 export interface IForm {
+  id?: number;
   title: string;
   subheading: string;
   fields: IFormField[];

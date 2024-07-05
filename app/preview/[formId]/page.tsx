@@ -43,6 +43,7 @@ export default function PreviewFormPage({ params: { formId } }: Props) {
       }
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formId, user]);
   return (
     <div

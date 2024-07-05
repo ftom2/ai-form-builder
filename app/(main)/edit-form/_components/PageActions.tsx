@@ -10,7 +10,7 @@ export default function PageActions({ id }: Props) {
     <div className="flex w-full justify-between">
       <Button
         asChild
-        variant="ghost"
+        color="ghost"
         size="icon"
         className="hover:bg-transparent mb-5 hover:font-bold"
       >

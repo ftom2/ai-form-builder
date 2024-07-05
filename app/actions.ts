@@ -2,8 +2,18 @@
 
 import { db } from "@/db";
 import { jsonForms } from "@/db/schema";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { UpdateFormMetadataRequest } from "./(main)/edit-form/types";
+
+export async function getAllForms(email: string) {
+  const response = await db
+    .select()
+    .from(jsonForms)
+    .where(eq(jsonForms.createdBy, email))
+    .orderBy(desc(jsonForms.createdAt));
+
+  return response;
+}
 
 export async function getFormData(id: number, email: string) {
   const response = await db

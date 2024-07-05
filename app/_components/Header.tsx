@@ -16,7 +16,7 @@ export default function Header({}: Props) {
         {isSignedIn ? (
           <div className="flex items-center gap-5">
             <Link href="/dashboard">
-              <Button variant="outline">Dashboard</Button>
+              <Button color="outline">Dashboard</Button>
             </Link>
             <UserButton />
           </div>

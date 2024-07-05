@@ -74,7 +74,7 @@ export const componentsToFormElementsMapper = (
         <Popover>
           <PopoverTrigger asChild className="w-full">
             <Button
-              variant={"outline"}
+              color={"outline"}
               className={cn(
                 "w-[280px] justify-start text-left font-normal",
                 !data?.date && "text-muted-foreground"

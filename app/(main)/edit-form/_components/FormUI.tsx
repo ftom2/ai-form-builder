@@ -4,6 +4,7 @@ import { IForm, IOnUpdateFieldArg } from "../types";
 import { componentsToFormElementsMapper } from "./componentsMapper";
 import FieldActions from "./FieldActions";
 import { useFormStore } from "@/app/store/useFormStore";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   json: IForm | null;
@@ -71,7 +72,6 @@ export default function FormUI({
           </div>
         ))}
       </form>
-      <button className="mt-5 w-full max-w-xs btn btn-primary">Button</button>
     </div>
   );
 }
